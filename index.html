@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <title>Audio/Video Recording</title>
+        
+        <!-- Include Video.js stylesheet (https://videojs.com/) -->
+        <link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        
+        <title>Video Recording | RecordRTC</title>
+      
+    </head>
+    <body>
+        <!-- Navbar Header -->
+            <nav class="navbar navbar-light">
+                <a class="navbar-brand" href="#">RTC</a>
+            </nav>
+        <!-- Main Content -->
+            <div class="mainContent">
+                <div class="container">
+                   <div class="row">
+                       <div class="col-md-5">
+                           <div class="titleText">
+                               <h3>Record Vedios Here </h3>
+                           </div>
+                           <button class="btn fullBtn"  id="btn-start-recording"><i class="fa fa-play"></i> Start Recording </button>
+                           <button class="btn borderBtn" id="btn-stop-recording"><i class="fa fa-stop-circle" ></i> Stop Recording </button>
+                           <div id="vedios">
+                                <video  controls autoplay playsinline width="640" height="" 
+                                poster="./images/vedioBg.webp" allowfullscreen></video>
+                           </div>
+                       </div> <!-- end col-md-5-->
+                       <div class="col-md-7">
+                            <div class="titleText">
+                                <h3>Play Recorded Vedios </h3>
+                            </div>
+                            <div class="recorderVedios">  </div>
+                            <div class="modals"></div>
+                       </div><!-- end col-md-7-->
+                   </div> <!-- end row -->
+                </div>
+            </div>
+
+  
+  
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+        <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>   
+        <script>
+            var videoConstraints = {
+    video: {
+        mandatory: {
+    
+            // minFrameRate: 3,
+            // maxFrameRate: 32,
+            minAspectRatio: 1.77
+        },
+        optional: []
+    }
+};
+        var video = document.querySelector('video');
+        let vidSave = document.getElementById('vid2');
+        var bottom = document.getElementById('vedios');
+        function captureCamera(callback) {
+            navigator.mediaDevices.getUserMedia({ videoConstraints,audio: true, video: true }).then(function(camera) {
+                callback(camera);
+            }).catch(function(error) {
+                alert('Unable to capture your camera. Please check console logs.');
+                console.error(error);
+            });
+        }
+        var counter=0;
+        function stopRecordingCallback() {
+            counter++;
+            video.src = video.srcObject = null;
+            video.muted = false;
+            video.volume = 1;
+                   var Rcvideo = $('<video />', {
+                        id: 'video',
+                        src: URL.createObjectURL(recorder.getBlob()),
+                        type: 'video/mp4',
+                        controls: true });
+                    var vedioDiv= $('<div class="vedioThumb"></div>');
+                    var playBtn= $('<button class="btn btn-primary" data-toggle="modal" data-target="#modal'+counter+'"><i class="fa fa-play"></i></button>');
+                    vedioDiv.appendTo($('.recorderVedios')); 
+                    
+                    playBtn.appendTo(vedioDiv);
+                    var modalMain=$('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" ></div>')
+                    var modal=$('<div class="modal-dialog modal-dialog-centered modal-lg" role="document"> <div class="modal-content"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <div class="modal-body"></div></div></div>')
+                     modal.appendTo(modalMain);
+                     modalMain.attr('id' , 'modal'+counter);                     
+                    $('.modals').append(modalMain);
+                    $('#modal'+counter).on('shown.bs.modal', function(){
+                        $(this).find(".modal-body").append(Rcvideo);
+                       
+                     });
+                    
+                    //vidSave.src = URL.createObjectURL(recorder.getBlob());
+                    recorder.camera.stop();
+                    recorder.destroy();
+                    recorder = null;
+                    
+                    $('#modal'+counter).on('hide.bs.modal', function(e) { 
+                       Rcvideo[0].pause();
+                    });
+                   
+                   
+        }
+        
+        var recorder; // globally accessible
+        
+        document.getElementById('btn-start-recording').onclick = function() {
+           
+            this.disabled = false;
+            captureCamera(function(camera) {
+                video.muted = true;
+               video.volume = 0;
+                video.srcObject = camera;
+        
+                recorder = RecordRTC(camera, {
+                    type: 'video'
+                });
+        
+                recorder.startRecording();
+        
+                // release camera on stopRecording
+                recorder.camera = camera;
+        
+                document.getElementById('btn-stop-recording').disabled = false;
+            });
+        };
+        
+        document.getElementById('btn-stop-recording').onclick = function() {
+            this.disabled = false;
+            recorder.stopRecording(stopRecordingCallback);
+        };
+        </script>
+      
+    </body>
+    </html>

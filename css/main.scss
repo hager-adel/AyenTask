@@ -1,0 +1,180 @@
+$primaryColor: #EB3232;
+$headingColor: #7d7676;
+$textColor:#444;
+/*-- fonts --*/
+@font-face {
+    font-family: CircularStd-Book;
+    src: url('../fonts/CircularStd-Book.otf');
+  }
+  body{
+    font-family: 'CircularStd-Book';
+    margin: 0;
+    background-color: #FAF5F5;
+  }
+  a:hover{text-decoration: none;}
+  
+
+  @mixin primaryBtn(){
+      background-color: $primaryColor;
+      border:none;
+      color:#fff;
+      padding: 8.5px 20.5px;
+      border-radius: 22px;
+      width: 45%;
+      margin-right: 4%;
+      margin-top: 30px;
+  }
+  @mixin focusLink {
+    box-shadow: none;
+  }
+  /*-- navbar --*/
+  nav{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.05);
+    height: 80px;
+    padding: 0px 31px;
+    .navbar-brand{
+        color:$primaryColor !important;
+        padding: 0 30px;
+        font-size: 35px;
+        font-weight: 600;
+        -webkit-text-emphasis-style: filled;
+    }
+  }
+  /*-- main-content --*/
+  .mainContent{
+      padding:40px 0;
+      .titleText{
+          color: $headingColor;
+          letter-spacing: 2.3px;
+      }
+      .fullBtn{
+          @include primaryBtn();
+          i {
+              margin-right: 10px;
+          }
+          &:focus{
+              @include focusLink();
+          }
+      }
+      .borderBtn{
+        @include primaryBtn();
+        background-color: transparent;
+        border:1px solid $primaryColor;
+        color: $textColor;
+        margin-left: 4%;
+        margin-right:0;
+        i {
+            margin-right: 10px;
+        }
+        &:focus{
+            @include focusLink();
+        }
+      }
+      .col-md-7{
+          padding-left:8%;
+      }
+     #vedios{
+         padding:30px 0;
+        video{
+          width: 100%;
+          border-radius: 20px;outline: none;
+         }
+     }
+     .recorderVedios{
+        padding: 20px 0;
+        .vedioThumb{
+            position: relative;
+            width: 45%;
+            height: 150px;
+            display: inline-block;
+            margin: 0 2%;
+            margin-top:15px;
+            border-radius: 20px;
+            background-image: url('../images/imgVedio.png');
+            background-size: contain;
+           
+            button{
+                position: absolute;
+                left: 45%;
+                top: 35%;
+                border-radius: 50%;
+                z-index: 5;
+                background-color: $primaryColor;
+                border:none;
+                &:focus{outline: none;box-shadow: none;}
+                &:active{ background-color: $primaryColor;}
+            }
+            &::after{
+                content: ""; 
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 20px;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(120deg, #323232, #2a2c2d);
+                opacity: .7;
+            }
+           }
+     }
+     .modals{
+         .modal-content{
+             background:transparent;
+             border:none;
+             .close{
+                 width:35px;
+                 height: 35px;
+                 background-color: $primaryColor;
+                 color: #fff;
+                 border-radius: 50%;
+                 position: absolute;
+                 z-index: 1;
+                 opacity: 1;
+                 right: 0;
+                 &:focus{outline: 0;}
+             
+             }
+         }
+        .modal-body video{
+             outline: none;
+             width: 100%;
+         }
+     }
+  }
+
+  /*-- media Query --*/
+  @media only screen and (max-width: 1024px) {
+    .fullBtn , .borderBtn{
+        width: 75% !important;
+        margin: 15px 0 0 !important;
+        display: block;
+    }
+    .titleText h3 {
+        font-size:25px;
+    }
+    
+  }
+  @media only screen and (max-width: 767px) {
+    .mainContent {
+        text-align: center;
+        .fullBtn , .borderBtn{
+        width: 65%;
+        margin: 15px auto 0 !important ;
+        display: block;
+    }
+    .col-md-7{
+        padding-left:0
+    }
+    .recorderVedios {
+        padding: 20px;
+        .vedioThumb{
+            width: 100%;
+        }
+    }
+}
+  }

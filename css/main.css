@@ -1,0 +1,187 @@
+/*-- fonts --*/
+@font-face {
+  font-family: CircularStd-Book;
+  src: url("../fonts/CircularStd-Book.otf");
+}
+body {
+  font-family: "CircularStd-Book";
+  margin: 0;
+  background-color: #FAF5F5;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*-- navbar --*/
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  background-color: #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+  height: 80px;
+  padding: 0px 31px;
+}
+nav .navbar-brand {
+  color: #EB3232 !important;
+  padding: 0 30px;
+  font-size: 35px;
+  font-weight: 600;
+  -webkit-text-emphasis-style: filled;
+}
+
+/*-- main-content --*/
+.mainContent {
+  padding: 40px 0;
+}
+.mainContent .titleText {
+  color: #7d7676;
+  letter-spacing: 2.3px;
+}
+.mainContent .fullBtn {
+  background-color: #EB3232;
+  border: none;
+  color: #fff;
+  padding: 8.5px 20.5px;
+  border-radius: 22px;
+  width: 45%;
+  margin-right: 4%;
+  margin-top: 30px;
+}
+.mainContent .fullBtn i {
+  margin-right: 10px;
+}
+.mainContent .fullBtn:focus {
+  box-shadow: none;
+}
+.mainContent .borderBtn {
+  background-color: #EB3232;
+  border: none;
+  color: #fff;
+  padding: 8.5px 20.5px;
+  border-radius: 22px;
+  width: 45%;
+  margin-right: 4%;
+  margin-top: 30px;
+  background-color: transparent;
+  border: 1px solid #EB3232;
+  color: #444;
+  margin-left: 4%;
+  margin-right: 0;
+}
+.mainContent .borderBtn i {
+  margin-right: 10px;
+}
+.mainContent .borderBtn:focus {
+  box-shadow: none;
+}
+.mainContent .col-md-7 {
+  padding-left: 8%;
+}
+.mainContent #vedios {
+  padding: 30px 0;
+}
+.mainContent #vedios video {
+  width: 100%;
+  border-radius: 20px;
+  outline: none;
+}
+.mainContent .recorderVedios {
+  padding: 20px 0;
+}
+.mainContent .recorderVedios .vedioThumb {
+  position: relative;
+  width: 45%;
+  height: 150px;
+  display: inline-block;
+  margin: 0 2%;
+  margin-top: 15px;
+  border-radius: 20px;
+  background-image: url("../images/imgVedio.png");
+  background-size: contain;
+}
+.mainContent .recorderVedios .vedioThumb button {
+  position: absolute;
+  left: 45%;
+  top: 35%;
+  border-radius: 50%;
+  z-index: 5;
+  background-color: #EB3232;
+  border: none;
+}
+.mainContent .recorderVedios .vedioThumb button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.mainContent .recorderVedios .vedioThumb button:active {
+  background-color: #EB3232;
+}
+.mainContent .recorderVedios .vedioThumb::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(120deg, #323232, #2a2c2d);
+  opacity: 0.7;
+}
+.mainContent .modals .modal-content {
+  background: transparent;
+  border: none;
+}
+.mainContent .modals .modal-content .close {
+  width: 35px;
+  height: 35px;
+  background-color: #EB3232;
+  color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  opacity: 1;
+  right: 0;
+}
+.mainContent .modals .modal-content .close:focus {
+  outline: 0;
+}
+.mainContent .modals .modal-body video {
+  outline: none;
+  width: 100%;
+}
+
+/*-- media Query --*/
+@media only screen and (max-width: 1024px) {
+  .fullBtn, .borderBtn {
+    width: 75% !important;
+    margin: 15px 0 0 !important;
+    display: block;
+  }
+
+  .titleText h3 {
+    font-size: 25px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .mainContent {
+    text-align: center;
+  }
+  .mainContent .fullBtn, .mainContent .borderBtn {
+    width: 65%;
+    margin: 15px auto 0 !important;
+    display: block;
+  }
+  .mainContent .col-md-7 {
+    padding-left: 0;
+  }
+  .mainContent .recorderVedios {
+    padding: 20px;
+  }
+  .mainContent .recorderVedios .vedioThumb {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
